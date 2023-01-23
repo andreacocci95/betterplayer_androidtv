@@ -22,6 +22,7 @@ class BetterPlayerMaterialClickableWidget extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: child,
+        focusColor: Colors.grey[300],
       ),
     );
   }
