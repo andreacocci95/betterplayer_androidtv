@@ -381,7 +381,7 @@ internal class BetterPlayer(
     ): MediaSource {
         val type: Int
         if (formatHint == null) {
-            type = Util.inferContentType(url)
+            type = Util.inferContentType(uri)
         } else {
             type = when (formatHint) {
                 FORMAT_SS -> C.CONTENT_TYPE_SS
