@@ -5,8 +5,6 @@ import 'dart:async';
 import 'package:better_player/src/configuration/better_player_buffering_configuration.dart';
 import 'package:better_player/src/core/better_player_utils.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'video_player_platform_interface.dart';
@@ -421,42 +419,15 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
   }
 
   @override
-  Widget buildView(int textureId) {
+  Widget buildView(int? textureId) {
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
         viewType: 'com.jhomlala/better_player',
         creationParamsCodec: const StandardMessageCodec(),
-        creationParams: {'textureId': textureId},
-      );
-    } else if (defaultTargetPlatform == TargetPlatform.android) {
-      return PlatformViewLink(
-        viewType: 'com.jhomlala/better_player',
-        surfaceFactory:
-            (BuildContext context, PlatformViewController controller) {
-          return AndroidViewSurface(
-            controller: controller as AndroidViewController,
-            gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
-            hitTestBehavior: PlatformViewHitTestBehavior.transparent,
-          );
-        },
-        onCreatePlatformView: (PlatformViewCreationParams params) {
-          final ExpensiveAndroidViewController controller =
-              PlatformViewsService.initExpensiveAndroidView(
-            id: params.id,
-            viewType: params.viewType,
-            layoutDirection: TextDirection.ltr,
-            creationParams: {'textureId': textureId},
-            creationParamsCodec: const StandardMessageCodec(),
-          );
-          controller
-            ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-            ..create();
-
-          return controller;
-        },
+        creationParams: {'textureId': textureId!},
       );
     } else {
-      return Texture(textureId: textureId);
+      return Texture(textureId: textureId!);
     }
   }
 
