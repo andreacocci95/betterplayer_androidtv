@@ -11,6 +11,7 @@ import 'package:better_player/src/video_player/video_player.dart';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BetterPlayerMaterialControls extends StatefulWidget {
   ///Callback used to send information if player bar is hidden or not
@@ -736,9 +737,9 @@ class _BetterPlayerMaterialControlsState
       );
     }
 
-    return CircularProgressIndicator(
-      valueColor:
-          AlwaysStoppedAnimation<Color>(_controlsConfiguration.loadingColor),
+    return LoadingAnimationWidget.staggeredDotsWave(
+      color: _controlsConfiguration.loadingColor,
+      size: 50,
     );
   }
 }

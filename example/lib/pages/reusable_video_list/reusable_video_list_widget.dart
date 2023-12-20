@@ -5,6 +5,7 @@ import 'package:better_player_example/model/video_list_data.dart';
 import 'package:better_player_example/pages/reusable_video_list/reusable_video_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ReusableVideoListWidget extends StatefulWidget {
   final VideoListData? videoListData;
@@ -138,9 +139,9 @@ class _ReusableVideoListWidgetState extends State<ReusableVideoListWidget> {
                       : Container(
                           color: Colors.black,
                           child: Center(
-                            child: CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                            child: LoadingAnimationWidget.staggeredDotsWave(
+                              color: Colors.white,
+                              size: 50,
                             ),
                           ),
                         ),
