@@ -12,8 +12,26 @@ void main() {
 
   testWidgets("Better Player simple player - network",
       (WidgetTester tester) async {
-    await tester.pumpWidget(_wrapWidget(
-        BetterPlayer.network(BetterPlayerTestUtils.bugBuckBunnyVideoUrl)));
+    await tester.pumpWidget(
+      _wrapWidget(
+        BetterPlayer(
+          controller: BetterPlayerController(
+            BetterPlayerConfiguration(),
+            betterPlayerDataSource: BetterPlayerDataSource(
+              BetterPlayerDataSourceType.network,
+              "https://rsila1-lsvs.akamaized.net/out/v1/34804ac42575499d9c68c3659fbdcd5d/index.mpd?dw=7200",
+              liveStream: true,
+              videoFormat: BetterPlayerVideoFormat.dash,
+              drmConfiguration: BetterPlayerDrmConfiguration(
+                drmType: BetterPlayerDrmType.widevine,
+                licenseUrl:
+                    "https://srg.live.ott.irdeto.com/licenseServer/widevine/v1/SRG/license?contentId=RSI1DRM",
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
     expect(find.byWidgetPredicate((widget) => widget is BetterPlayer),
         findsOneWidget);
   });
