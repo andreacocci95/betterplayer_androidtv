@@ -32,7 +32,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -48,7 +48,9 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        applicationId "com.jhomlala.better_player"
+        minSdkVersion 21
+        targetSdkVersion 34
     }
 
     dependencies {
